@@ -30,23 +30,30 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
         <script src="http://208.75.75.92:8080/flippadoo/scripts/library/jquery.datepick.js"></script>
         <script src="http://208.75.75.92:8080/flippadoo/scripts/tickit.js"></script>
-        <script type="text/javascript">      
+        <script>     
        
-        $(function () {
-            var frm = $(document.myform);
-            var dat = JSON.stringify(frm.serializeArray());
+            $(document).ready(function () {
+                $("button").click(function () {
+                    var url = 'http://208.75.75.92:8080/flippadoo/mobile/tickitService/355901361/createTickit';
 
-            alert("I am about to POST this:\n\n" + dat);
+                    $.post(url,
+                    {
+                        apiKey: "355901361",
+                        owner: "1",
+                        subject: "Test iPhone"
 
-            $.post(
-                frm.attr("action"),
-                dat,
-                function (data) {
-                    alert("Response: " + data);
-                }
-            );
-        });
+                    },
+                    function (data, status) {
+                        alert("Data: " + data + "\nStatus: " + status);
+                    });
+                });
+            });
+            
+            //var apiKey = $('#apiKey').val();
+           // var url = 'http://208.75.75.92:8080/flippadoo/mobile/tickitService/355901361/createTickit';
+           
 
+         
         function getDateTime() {
             var now = new Date();
             var year = now.getFullYear();
@@ -83,14 +90,12 @@
         }
         </script>
     </head>
- <body onload="javascript:document.myform.submit()">
-<form name="createTickit" id ="createTickit" action="http://208.75.75.92:8080/flippadoo/mobile/tickitService/createTickit" enctype="multipart/form-data" method="post">
- <input type="hidden" name="apiKey" id="apiKey" value="355901361" >
- <input type="hidden" name="ownerId" value="1">
- <input type="hidden" name="subject" value="Whami Test">
- <SCRIPT type="text/javascript">
-     document.write("<input type='hidden' name='msgBody' value='Local iPhone Whami time is: " + getDateTime() + "'>")
- </SCRIPT>
-</form>
+ <body>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+<button>Click me</button>
 </body>
 </html>
