@@ -27,7 +27,7 @@
         <title>Hello World</title>
         <script type="text/javascript">
         function onBodyLoad() {
-           document.getElementById("Whami").addEventListener("click", handleSearch);
+           //document.getElementById("Whami").addEventListener("click", handleSearch);
         }
 
         function handleSearch(e) {
@@ -46,14 +46,11 @@
         <script type="text/javascript" src="phonegap.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
-            app.initialize();
-            alert("Whami is working ok");
-            document.write("<input type='button' id='Whami' value='Whami Test' />");
-            
+            app.initialize();                                   
         </script>  
        <br />
        <br />
         <br />
-      <input type="button" id="test"  value="test" onclick=handleSearch(this)  />
+      <input type="button" id="test"  value="Whami Test 2" onclick=handleSearch(this) />
     </body>
 </html>
