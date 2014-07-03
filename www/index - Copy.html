@@ -30,23 +30,12 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
         <script src="http://208.75.75.92:8080/flippadoo/scripts/library/jquery.datepick.js"></script>
         <script src="http://208.75.75.92:8080/flippadoo/scripts/tickit.js"></script>
-        <script type="text/javascript">      
+        <script type="text/javascript">
        
-        $(function () {
-            var frm = $(document.myform);
-            var dat = JSON.stringify(frm.serializeArray());
-
-            alert("I am about to POST this:\n\n" + dat);
-
-            $.post(
-                frm.attr("action"),
-                dat,
-                function (data) {
-                    alert("Response: " + data);
-                }
-            );
-        });
-
+        function handleSearch(e) {
+            alert("The time is "+ getDateTime());
+            
+        }
         function getDateTime() {
             var now = new Date();
             var year = now.getFullYear();
@@ -83,14 +72,48 @@
         }
         </script>
     </head>
- <body onload="javascript:document.myform.submit()">
-<form name="createTickit" id ="createTickit" action="http://208.75.75.92:8080/flippadoo/mobile/tickitService/createTickit" enctype="multipart/form-data" method="post">
- <input type="hidden" name="apiKey" id="apiKey" value="355901361" >
- <input type="hidden" name="ownerId" value="1">
- <input type="hidden" name="subject" value="Whami Test">
- <SCRIPT type="text/javascript">
-     document.write("<input type='hidden' name='msgBody' value='Local iPhone Whami time is: " + getDateTime() + "'>")
- </SCRIPT>
-</form>
-</body>
+   <body>
+        <div class="app">
+            <h1>Whami Test 4</h1>            
+        </div>
+        <script type="text/javascript" src="phonegap.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>        
+      <div>
+      This is a test. <br />
+      <input type="button" id="test"  value="Whami Test 3" onclick=handleSearch(this) />
+
+      </div>
+       <form name="createTickit" id ="createTickit" action="http://208.75.75.92:8080/flippadoo/mobile/tickitService/createTickit" enctype="multipart/form-data" method="post">
+            <div class="header"></div>
+            <h2><a href="http://208.75.75.92:8080/flippadoo/app/grid/tickitDetails">Whami from Home v1.0</a> </h2>
+            <dl>
+                 <dd>
+                    <!-- Optional fields -->
+                    <!-- input type="hidden" name="tickitCustomId" value="" -->
+                    <input type="hidden" name="apiKey" id="apiKey" value="355901361" >                    
+                    <input type="hidden" name="ownerId" value="1">
+                    <input type="hidden" name="ip" value="http://192.168.1.240:8080">
+                    <input type="hidden" name="tickitStatus" value="7">
+                    <input type="hidden" name="tickitType" value="12">
+                    <!-- in this case the type is child with a specific parent- just an example -->
+                    <input type="hidden" name="parentId" value="123456804">
+                    <input type="hidden" name="recipient" value="christopherhealy@outlook.com">
+                    <input type="hidden" name="subject" value="Whami">
+ 		            <SCRIPT type="text/javascript">
+ 		        document.write("<input type='hidden' name='msgBody' value='Local Whami time is: " + getDateTime() + "'>")
+                    </SCRIPT>
+                    <input type="hidden" name="startDate" value="">
+                    <input type="hidden" name="endDate" value="">
+                    <!-- substitute this with the actual GPS (this is Chris's home) -->
+                    <!-- gps is an array that requires two values, separated by a semi-colon -->
+                    <input type="hidden" name="gps" value="45.3875078;-75.7548862">
+		    <input type="hidden" name="tickitFile" value="">
+                </dd>               
+               
+            <dl>
+            <div class="buttonBlock">
+                <button class="submitBTN" onclick=handleSearch(this)>Whami</button> </div>
+	     
+        </form>
+    </body>
 </html>
