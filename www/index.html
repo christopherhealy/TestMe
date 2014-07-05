@@ -29,6 +29,11 @@
                                 '<hr />' + element.innerHTML;
         }
 
+        function TestMe(e) {
+            alert("Trying");
+            watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+        }
+
         // clear the watch that was started earlier
         // 
         function clearWatch() {
@@ -50,6 +55,7 @@
   <body>
     <br />
     <p id="geolocation">Watching geolocation...</p>
-    <button onclick="clearWatch();">Clear Watch</button>     
+    <button onclick="clearWatch();">Clear Watch</button>  
+    <button id="Test"  onclick="TestMe(this);">Test me</button>
   </body>
 </html>
