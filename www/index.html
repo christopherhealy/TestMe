@@ -19,8 +19,7 @@ function onBodyLoad() {
 //During testing, Let me know we got this far
 alert("onBodyLoad");
 //Add the PhoneGap deviceready event listener
-document.addEventListener("deviceready", onDeviceReady,
-false);
+document.addEventListener("deviceready", onDeviceReady,false);
 }
 
 function onDeviceReady() {
@@ -38,13 +37,11 @@ function getLocation() {
 alert("getLocation");
 if(pgr == true) {
 var locOptions = {
-timeout : 5000,
+timeout : 50000,
 enableHighAccuracy : true
 };
 //get the current location
-navigator.geolocation.getCurrentPosition(
-onGeolocationSuccess, onGeolocationError,
-locOptions);
+navigator.geolocation.getCurrentPosition(onGeolocationSuccess, onGeolocationError,locOptions);
 //Clear the current location while we wait for a
 //reading
 lc.innerHTML = "Reading location...";
