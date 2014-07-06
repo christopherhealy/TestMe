@@ -7,7 +7,7 @@ maximum-scale=1.0, user-scalable=no;" />
 <meta http-equiv="Content-type" content="text/html;
 charset=utf-8">
 <script type="text/javascript" charset="utf-8"
-src="phonegap-1.2.0.js"></script>
+src="phonegap-3.3.0.js"></script>
 <script type="text/javascript">
 
 //Location content
@@ -17,9 +17,10 @@ var pgr = false;
 
 function onBodyLoad() {
 //During testing, Let me know we got this far
-alert("onBodyLoad");
+alert("onBodyLoad - got this far");
 //Add the PhoneGap deviceready event listener
-document.addEventListener("deviceready", onDeviceReady,false);
+document.addEventListener("deviceready", onDeviceReady, false);
+element.innerHTML = 'PhoneGap (version ' + device.phonegap + ')<br />' + device.platform + ' ' + device.name + ' (version ' + device.version + ').';
 }
 
 function onDeviceReady() {
