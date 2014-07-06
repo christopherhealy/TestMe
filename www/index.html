@@ -1,61 +1,89 @@
 <html>
-  <head>
-    <title>Device Properties Example</title>
+<head>
+<title>Example 19-1</title>
+<meta name="viewport" content="width=device-width,
+height=device-height initial-scale=1.0,
+maximum-scale=1.0, user-scalable=no;" />
+<meta http-equiv="Content-type" content="text/html;
+charset=utf-8">
+<script type="text/javascript" charset="utf-8"
+src="phonegap-1.2.0.js"></script>
+<script type="text/javascript">
 
-    <script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"></script>
-    <script type="text/javascript" charset="utf-8">
+//Location content
+var lc;
+//PhoneGap Ready variable
+var pgr = false;
 
-        // Wait for Cordova to load
-        //
-        document.addEventListener("deviceready", onDeviceReady, false);
+function onBodyLoad() {
+//During testing, Let me know we got this far
+alert("onBodyLoad");
+//Add the PhoneGap deviceready event listener
+document.addEventListener("deviceready", onDeviceReady,
+false);
+}
 
-        var watchID = null;
+function onDeviceReady() {
+//During testing, Let me know PhoneGap actually
+// initialized
+alert("onDeviceReady");
+//Get a handle we'll use to adjust the accelerometer
+//content
+lc = document.getElementById("locationInfo");
+//Set the variable that lets other parts of the program
+//know that PhoneGap is initialized
+pgr = true;
+}
+function getLocation() {
+alert("getLocation");
+if(pgr == true) {
+var locOptions = {
+timeout : 5000,
+enableHighAccuracy : true
+};
+//get the current location
+navigator.geolocation.getCurrentPosition(
+onGeolocationSuccess, onGeolocationError,
+locOptions);
+//Clear the current location while we wait for a
+//reading
+lc.innerHTML = "Reading location...";
+} else {
+alert("Please wait,\nPhoneGap is not ready.");
+}
+}
 
-        // Cordova is ready
-        //
-        function onDeviceReady() {
-            // Get the most accurate position updates available on the
-            // device.
-            var options = { enableHighAccuracy: true };
-            watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
-        }
+function onGeolocationSuccess(loc) {
+alert("onLocationSuccess");
+//We received something from the API, so first get the
+// timestamp in a date object so we can work with it
+var d = new Date(loc.timestamp);
+//Then replace the page's content with the current
+// location retrieved from the API
+lc.innerHTML = '<b>Current Location</b><hr />' +
+'<b>Latitude</b>: ' + loc.coords.latitude +
+'<br /><b>Longitude</b>: ' + loc.coords.longitude +
+'<br /><b>Altitude</b>: ' + loc.coords.altitude +
+'<br /><b>Accuracy</b>: ' + loc.coords.accuracy +
+'<br /><b>Altitude Accuracy</b>: ' + loc.coords.altitudeAccuracy +
+'<br /><b>Heading</b>: ' + loc.coords.heading +
+'<br /><b>Speed</b>: ' + loc.coords.speed +
+'<br /><b>Timestamp</b>: ' + d.toLocaleString();
+}
 
-        // onSuccess Geolocation
-        //
-        function onSuccess(position) {
-            var element = document.getElementById('geolocation');
-            element.innerHTML = 'Latitude: ' + position.coords.latitude + '<br />' +
-                                'Longitude: ' + position.coords.longitude + '<br />' +
-                                '<hr />' + element.innerHTML;
-        }
-
-        function TestMe(e) {
-            alert("Trying");
-            watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
-        }
-
-        // clear the watch that was started earlier
-        // 
-        function clearWatch() {
-            if (watchID != null) {
-                navigator.geolocation.clearWatch(watchID);
-                watchID = null;
-            }
-        }
-
-        // onError Callback receives a PositionError object
-        //
-        function onError(error) {
-            alert('code: ' + error.code + '\n' +
-                  'message: ' + error.message + '\n');
-        }             
-
-    </script>
-  </head>
-  <body>
-    <br />
-    <p id="geolocation">Watching geolocation...</p>
-    <button onclick="clearWatch();">Clear Watch</button>  
-    <button id="Test"  onclick="TestMe(this);">Test me</button>
-  </body>
+function onGeolocationError(e) {
+alert("Geolocation error: #" + e.code + "\n" +
+e.message);
+}
+</script>
+</head>
+<body onload="onBodyLoad()">
+<h1>Geolocation API Demo #1</h1>
+<p>
+Click the button to determine the current location.
+</p>
+<input type="button" value="Refresh Location" onclick="getLocation();">
+<hr />
+<p id="locationInfo"></p>
+</body>
 </html>
